@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: td-agent-bit
+  name: td-agent-bit
+  namespace: logging
+spec:
+  ports:
+  - name: 24224-24224
+    port: 24224
+    protocol: TCP
+    targetPort: 24224
+  selector:
+    app: td-agent-bit
+  type: ClusterIP

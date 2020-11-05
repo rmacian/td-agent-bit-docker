@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    app: td-agent-bit
+  annotations:
+    fluentbit.io/exclude: "true"
+  name: td-agent-bit
+  namespace: logging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: td-agent-bit
+  template:
+    metadata:
+      labels:
+        app: td-agent-bit
+    spec:
+      containers:
+      - image: {{ td_agent_image }}:{{ td_agent_version }}
+        imagePullPolicy: IfNotPresent
+        name: td-agent-bit

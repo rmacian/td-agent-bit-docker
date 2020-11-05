@@ -1,0 +1,17 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Create td-agent-bit deployment
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'templates/td-agent-bit-deployment.yaml') }}"
+        validate: 
+          fail_on_error: true
+          version: "{{k8s_version}}"
+    - name: Create td-agent-bit service
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'templates/td-agent-bit-svc.yaml') }}"
+        validate:
+          fail_on_error: true
+          version: "{{k8s_version}}"
